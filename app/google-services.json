@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "534042472118",
+    "project_id": "town-square-8b9ba",
+    "storage_bucket": "town-square-8b9ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534042472118:android:3b25b3f1f253fda362c017",
+        "android_client_info": {
+          "package_name": "com.makaota.townsquare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD5gxDgOP7HSf7_LZ_yoBreP3AfJTDNto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
