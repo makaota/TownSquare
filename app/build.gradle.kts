@@ -1,10 +1,9 @@
-plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.kotlin.serialization)
-    // Add the Google services Gradle plugin
-    id("com.google.gms.google-services")
-}
+    plugins {
+        id ("com.android.application")
+        id ("kotlin-android")
+        id ("kotlin-kapt") // Required for annotation processing
+        id ("dagger.hilt.android.plugin")
+    }
 
 android {
     namespace = "com.makaota.townsquare"
@@ -52,6 +51,11 @@ android {
     }
 }
 
+    kapt {
+        correctErrorTypes = true  // Helps resolve annotation processing issues
+        useBuildCache = false  // Optional: disable build cache for KAPT
+    }
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -84,8 +88,24 @@ dependencies {
 
     implementation(libs.material3)
 
+    //splash api library
+    implementation(libs.androidx.core.splashscreen)
 
+
+    //DataStore Preference Library
+    implementation(libs.androidx.datastore.preferences)
+
+    // Hilt Libraries
+    implementation(libs.androidx.hilt.navigation.compose) // For navigation-compose
+
+
+    implementation (libs.hilt.android)  // Hilt dependency
+    kapt (libs.hilt.android.compiler.v249)  // Hilt compiler for annotation processing
+   implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0")  // Kotlin stdlib
+
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
 
 
 
 }
+

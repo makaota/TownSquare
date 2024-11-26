@@ -14,4 +14,12 @@
     <color name="red">#FF5959</color>
     <color name="green">#06BAA9</color>
     <color name="highlight">#F7D358</color>
+
+    //Dark Colors
+    <color name="dark_blue">#000080</color>
+    <color name="dark_gray">#333333</color>
+
+    //Light Colors
+    <color name="light_gray">#CCCCCC</color>
+    <color name="light_yellow">#FFFFE0</color>
 </resources>
