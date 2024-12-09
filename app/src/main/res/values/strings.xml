@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TownSquare</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
 </resources>

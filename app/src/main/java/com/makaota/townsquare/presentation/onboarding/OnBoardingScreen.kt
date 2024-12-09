@@ -20,14 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.makaota.townsquare.presentation.common.OnBoardingButton
-import com.makaota.townsquare.presentation.common.OnBoardingTextButton
+import com.makaota.townsquare.presentation.onboarding.components.OnBoardingButton
+import com.makaota.townsquare.presentation.onboarding.components.OnBoardingTextButton
 import com.makaota.townsquare.presentation.onboarding.components.OnBoardingPage
 import com.makaota.townsquare.presentation.onboarding.components.PageIndicator
 import com.makaota.townsquare.ui.theme.TownSquareTheme
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @Composable
 fun OnBoardingScreen(

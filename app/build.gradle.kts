@@ -106,6 +106,9 @@ dependencies {
     implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
 
 
+    // lib phonenumber dependency
+    implementation("com.googlecode.libphonenumber:libphonenumber:8.12.52")
+
 
 }
 

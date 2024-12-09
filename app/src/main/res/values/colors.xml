@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="black_color">#000000</color>
+    <color name="black_color">#ff000000</color>
     <color name="orange">#FFA500</color>
     <color name="red">#FF5959</color>
     <color name="green">#06BAA9</color>

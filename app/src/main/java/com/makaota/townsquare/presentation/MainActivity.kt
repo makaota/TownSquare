@@ -1,15 +1,12 @@
-package com.makaota.townsquare
+package com.makaota.townsquare.presentation
 
 import android.app.Activity
-import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.OvershootInterpolator
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -19,12 +16,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -39,24 +33,13 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.TextField
 
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -71,14 +54,11 @@ import androidx.compose.ui.AbsoluteAlignment
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -89,7 +69,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -104,20 +83,21 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.makaota.townsquare.R
+import com.makaota.townsquare.Screens
 import com.makaota.townsquare.data.manager.LocalUserManagerImp
-import com.makaota.townsquare.domain.usecases.AppEntryUseCases
-import com.makaota.townsquare.domain.usecases.ReadAppEntry
-import com.makaota.townsquare.domain.usecases.SaveAppEntry
+import com.makaota.townsquare.domain.usecases.app_entry.AppEntryUseCases
+import com.makaota.townsquare.domain.usecases.app_entry.ReadAppEntry
+import com.makaota.townsquare.domain.usecases.app_entry.SaveAppEntry
 import com.makaota.townsquare.presentation.onboarding.OnBoardingScreen
 import com.makaota.townsquare.presentation.onboarding.OnBoardingViewModel
+import com.makaota.townsquare.presentation.registration.RegistrationScreen
+import com.makaota.townsquare.presentation.registration.RegistrationViewModel
 import com.makaota.townsquare.ui.theme.TownSquareTheme
 import com.makaota.townsquare.ui.theme.sourceSans3
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
-import kotlin.math.log
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -154,8 +134,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             TownSquareTheme {
               //  Navigation()
-                val viewModel: OnBoardingViewModel = hiltViewModel()
-                OnBoardingScreen(event = viewModel::onEvent)
+//                val viewModel: OnBoardingViewModel = hiltViewModel()
+//                OnBoardingScreen(event = viewModel::onEvent)
+
+                val viewModel: RegistrationViewModel = hiltViewModel()
+                RegistrationScreen(viewModel)
             }
         }
     }
@@ -1247,14 +1230,6 @@ fun CreateAccount() {
                     )
                 },
 
-//                trailingIcon = {
-//                    if (nameInput.isNotEmpty()) {
-//                        Image(
-//                            modifier = Modifier.clickable { nameInput = "" },
-//                            painter = painterResource(id = R.drawable.clear_icon),
-//                            contentDescription = "clear icon")
-//                    }
-//                },
                 colors = TextFieldDefaults.colors(
                     focusedTextColor = Color.White,
                     focusedLabelColor = colorResource(id = R.color.green),
