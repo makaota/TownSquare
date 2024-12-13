@@ -89,6 +89,11 @@ import com.makaota.townsquare.data.manager.LocalUserManagerImp
 import com.makaota.townsquare.domain.usecases.app_entry.AppEntryUseCases
 import com.makaota.townsquare.domain.usecases.app_entry.ReadAppEntry
 import com.makaota.townsquare.domain.usecases.app_entry.SaveAppEntry
+import com.makaota.townsquare.presentation.login.email.EnterEmailScreen
+import com.makaota.townsquare.presentation.login.email.EnterEmailViewModel
+import com.makaota.townsquare.presentation.login.loginCode.LoginCodeScreen
+import com.makaota.townsquare.presentation.login.password.EnterPasswordScreen
+import com.makaota.townsquare.presentation.login.password.EnterPasswordViewModel
 import com.makaota.townsquare.presentation.onboarding.OnBoardingScreen
 import com.makaota.townsquare.presentation.onboarding.OnBoardingViewModel
 import com.makaota.townsquare.presentation.registration.RegistrationScreen
@@ -137,8 +142,16 @@ class MainActivity : ComponentActivity() {
 //                val viewModel: OnBoardingViewModel = hiltViewModel()
 //                OnBoardingScreen(event = viewModel::onEvent)
 
-                val viewModel: RegistrationViewModel = hiltViewModel()
-                RegistrationScreen(viewModel)
+//                val viewModel: RegistrationViewModel = hiltViewModel()
+//                RegistrationScreen(viewModel)
+
+//                val viewModel: EnterEmailViewModel = hiltViewModel()
+//                EnterEmailScreen(viewModel)
+
+//                val viewModel: EnterPasswordViewModel = hiltViewModel()
+//                EnterPasswordScreen(viewModel)
+
+                LoginCodeScreen()
             }
         }
     }

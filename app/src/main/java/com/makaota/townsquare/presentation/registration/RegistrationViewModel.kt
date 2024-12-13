@@ -19,7 +19,6 @@ import javax.inject.Inject
 class RegistrationViewModel @Inject constructor(
     private val validateName: ValidateName,
     private val validateSurname: ValidateSurname,
-  //  private val validateEmail: ValidateEmail,
     private val validatePassword: ValidatePassword,
     private val validatePhoneNumber: ValidatePhoneNumber
 
@@ -40,10 +39,7 @@ class RegistrationViewModel @Inject constructor(
             is RegistrationFormEvent.SurnameChanged -> {
                 state = state.copy(surname = event.surname)
             }
-//            is RegistrationFormEvent.EmailChanged -> {
-//                state = state.copy(email = event.email)
-//
-//            }
+
             is RegistrationFormEvent.PasswordChanged -> {
                 state = state.copy(password = event.password)
 
@@ -63,7 +59,6 @@ class RegistrationViewModel @Inject constructor(
     private fun validateForm() {
         val nameResult = validateName.validateName(state.name)
         val surnameResult = validateSurname.validateSurname(state.surname)
-   //     val emailResult = validateEmail.validateEmail(state.email)
         val passwordResult = validatePassword.validatePassword(state.password)
         val phoneNumberResult = validatePhoneNumber.validatePhoneNumber(state.phoneNumber, "+27")
 

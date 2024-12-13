@@ -62,6 +62,11 @@ fun TownSquareTextField(
     val labelColor = if (isSystemInDarkTheme())colorResource(id = R.color.light_gray)
     else Color.Gray
 
+    val backgroundColor = if (isSystemInDarkTheme()) colorResource(id = R.color.black_color)
+    else colorResource(
+        id = R.color.white
+    )
+
 
     val focusRequester = remember { FocusRequester() }
     var isFocused by remember { mutableStateOf(false) }
@@ -80,8 +85,9 @@ fun TownSquareTextField(
         colors = TextFieldDefaults.colors(
             focusedTextColor = textColor,
             unfocusedTextColor = textColor,
-            focusedContainerColor = MaterialTheme.colorScheme.background,
-            unfocusedContainerColor = MaterialTheme.colorScheme.background,
+            focusedContainerColor = backgroundColor,
+            errorContainerColor = backgroundColor,
+            unfocusedContainerColor = backgroundColor,
             cursorColor = colorResource(id = R.color.green),
             focusedIndicatorColor = colorResource(id = R.color.green),
             unfocusedIndicatorColor = Color.Gray,
