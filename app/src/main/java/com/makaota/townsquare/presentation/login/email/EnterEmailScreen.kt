@@ -51,6 +51,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.makaota.townsquare.R
 import com.makaota.townsquare.presentation.common.TownSquareButton
 import com.makaota.townsquare.presentation.common.TownSquareTextField
@@ -60,7 +61,10 @@ import com.makaota.townsquare.ui.theme.sourceSans3
 
 
 @Composable
-fun EnterEmailScreen(viewModel: EnterEmailViewModel = hiltViewModel<EnterEmailViewModel>()) {
+fun EnterEmailScreen(
+    viewModel: EnterEmailViewModel = hiltViewModel<EnterEmailViewModel>(),
+    navController: NavController
+) {
 
     val scrollState = rememberScrollState()
 
@@ -109,7 +113,7 @@ fun EnterEmailScreen(viewModel: EnterEmailViewModel = hiltViewModel<EnterEmailVi
     ) {
 
         Image(
-            modifier = Modifier.clickable { },
+            modifier = Modifier.clickable { navController.navigateUp()},
             painter = painterResource(id = R.drawable.back_vector),
             contentDescription = "Back Icon",
             colorFilter = ColorFilter.tint(tintColor)
@@ -244,16 +248,5 @@ fun EnterEmailScreen(viewModel: EnterEmailViewModel = hiltViewModel<EnterEmailVi
                 fontFamily = sourceSans3
             )
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true)
-@Composable
-fun EnterEmailPreview() {
-    TownSquareTheme {
-
-        val viewModel: EnterEmailViewModel = hiltViewModel()
-        EnterEmailScreen(viewModel)
     }
 }

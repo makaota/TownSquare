@@ -53,15 +53,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.makaota.townsquare.R
 import com.makaota.townsquare.presentation.common.TownSquareButton
 import com.makaota.townsquare.presentation.common.TownSquareTextField
+import com.makaota.townsquare.presentation.navgraph.Route
 import com.makaota.townsquare.ui.theme.TownSquareTheme
 import com.makaota.townsquare.ui.theme.sourceSans3
 
 @Composable
 fun RegistrationScreen(
     viewModel: RegistrationViewModel = hiltViewModel<RegistrationViewModel>(),
+    navController: NavController
 ) {
 
     val scrollState = rememberScrollState()
@@ -93,6 +96,8 @@ fun RegistrationScreen(
                         context, "Registration Successful",
                         Toast.LENGTH_SHORT
                     ).show()
+                    // Navigate to the next screen
+                    navController.navigate(Route.EnterEmailScreen.route)
                 }
             }
         }
@@ -268,7 +273,7 @@ fun RegistrationScreen(
                                 color = colorResource(id = R.color.orange)
                             )
                         } else {
-                            Text("e.g. 0731234567")
+                            Text("e.g. +27731234567")
                         }
                     }
                 },
@@ -327,8 +332,11 @@ fun RegistrationScreen(
         }
         TownSquareButton(
             onClick = {
+                // Trigger form validation
                 viewModel.onEvent(RegistrationFormEvent.Submit)
-                Log.d("FormValidation", "State: $state")
+                    // Log or show an error message
+                    Log.d("FormValidation", "Form is invalid: $state")
+
             },
             text = "Continue",
             image = painterResource(id = R.drawable.arrow_right),
@@ -350,14 +358,4 @@ fun RegistrationScreen(
 
 }
 
-@Preview(showBackground = true)
-@Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true)
-@Composable
-fun RegistrationScreenPreview() {
-    TownSquareTheme {
-
-        val viewModel: RegistrationViewModel = hiltViewModel()
-        RegistrationScreen(viewModel)
-    }
-}
 

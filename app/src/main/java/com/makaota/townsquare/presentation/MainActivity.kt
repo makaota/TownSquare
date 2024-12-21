@@ -46,6 +46,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -89,11 +90,14 @@ import com.makaota.townsquare.data.manager.LocalUserManagerImp
 import com.makaota.townsquare.domain.usecases.app_entry.AppEntryUseCases
 import com.makaota.townsquare.domain.usecases.app_entry.ReadAppEntry
 import com.makaota.townsquare.domain.usecases.app_entry.SaveAppEntry
+import com.makaota.townsquare.presentation.common.ProgressDialog
 import com.makaota.townsquare.presentation.login.email.EnterEmailScreen
 import com.makaota.townsquare.presentation.login.email.EnterEmailViewModel
 import com.makaota.townsquare.presentation.login.loginCode.LoginCodeScreen
 import com.makaota.townsquare.presentation.login.password.EnterPasswordScreen
 import com.makaota.townsquare.presentation.login.password.EnterPasswordViewModel
+import com.makaota.townsquare.presentation.navgraph.NavGraph
+import com.makaota.townsquare.presentation.navgraph.Route
 import com.makaota.townsquare.presentation.onboarding.OnBoardingScreen
 import com.makaota.townsquare.presentation.onboarding.OnBoardingViewModel
 import com.makaota.townsquare.presentation.registration.RegistrationScreen
@@ -138,20 +142,29 @@ class MainActivity : ComponentActivity() {
         }
         setContent {
             TownSquareTheme {
-              //  Navigation()
-//                val viewModel: OnBoardingViewModel = hiltViewModel()
-//                OnBoardingScreen(event = viewModel::onEvent)
+                val showDialog by remember { mutableStateOf(true) }
+                val viewModel: MainViewModel = hiltViewModel()
 
-//                val viewModel: RegistrationViewModel = hiltViewModel()
-//                RegistrationScreen(viewModel)
+                // Observe the onboarding state
+                val onBoardingState by viewModel.onBoardingState.collectAsState()
+                // Show a loading screen until the state is resolved
+                if (onBoardingState == null) {
+                    // Show progress dialog
+                    ProgressDialog(
+                        message = "Please wait...",
+                        isVisible = showDialog
+                    ) // A simple placeholder or loading composable
+                } else {
 
-//                val viewModel: EnterEmailViewModel = hiltViewModel()
-//                EnterEmailScreen(viewModel)
+                    // Determine start destination dynamically
+                    val startDestination = when (onBoardingState) {
+                        true -> Route.AppNavigation.route
+                        false -> Route.AppStartNavigation.route
+                        else -> Route.AppStartNavigation.route // Default for initial state
+                    }
 
-//                val viewModel: EnterPasswordViewModel = hiltViewModel()
-//                EnterPasswordScreen(viewModel)
-
-                LoginCodeScreen()
+                    NavGraph(startDestination = startDestination)
+                }
             }
         }
     }
